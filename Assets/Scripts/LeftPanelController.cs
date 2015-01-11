@@ -34,7 +34,9 @@ public class LeftPanelController : MonoBehaviour {
                 using (myStream)
                 {
 
-                    // Insert code to read the stream here.
+                    byte[] buffer = new byte[myStream.Length];
+                    myStream.Read(buffer, 0, (int)myStream.Length);
+                    InputManager.Instance.SetCurrentStateFromLoad(buffer);
                 }
             }
             catch (Exception ex)
@@ -56,7 +58,8 @@ public class LeftPanelController : MonoBehaviour {
         if (saveFileDialog1.ShowDialog() == DialogResult.OK)
         {
             myStream = saveFileDialog1.OpenFile();
-            // Code to write the stream goes here.
+            byte[] buffer = InputManager.Instance.GetCurrentStateToSave();
+            myStream.Write(buffer, 0, buffer.Length);
             myStream.Close();
         }
     }

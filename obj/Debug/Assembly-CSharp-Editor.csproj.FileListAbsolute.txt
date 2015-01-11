@@ -13,3 +13,5 @@ C:\Users\Dominik\Documents\GitHub\WI\Temp\bin\Debug\Assembly-CSharp.pdb
 C:\Users\Dominik\Documents\GitHub\WI\obj\Debug\Assembly-CSharp-Editor.csprojResolveAssemblyReference.cache
 C:\Users\Dominik\Documents\GitHub\WI\obj\Debug\Assembly-CSharp-Editor.dll
 C:\Users\Dominik\Documents\GitHub\WI\obj\Debug\Assembly-CSharp-Editor.pdb
+C:\Users\Dominik\Documents\GitHub\WI\Temp\bin\Debug\UnityEditor.UI.dll
+C:\Users\Dominik\Documents\GitHub\WI\Temp\bin\Debug\UnityEngine.UI.dll

@@ -1,0 +1,54 @@
+Initialize engine version: 4.6.0f3 (30840d631a27)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: NVIDIA GeForce GTX 860M (ID=0x1392)
+    Vendor:   NVIDIA
+    VRAM:     3072 MB
+Begin MonoManager ReloadAssembly
+Platform assembly: C:\Users\Dominik\Documents\GitHub\WI\WIBuild\WI build_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\Dominik\Documents\GitHub\WI\WIBuild\WI build_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\Dominik\Documents\GitHub\WI\WIBuild\WI build_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\Dominik\Documents\GitHub\WI\WIBuild\WI build_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\Dominik\Documents\GitHub\WI\WIBuild\WI build_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\Dominik\Documents\GitHub\WI\WIBuild\WI build_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: C:\Users\Dominik\Documents\GitHub\WI\WIBuild\WI build_Data\Managed\System.Windows.Forms.dll (this message is harmless)
+Loading C:\Users\Dominik\Documents\GitHub\WI\WIBuild\WI build_Data\Managed\System.Windows.Forms.dll into Unity Child Domain
+- Completed reload, in  0.048 seconds
+desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
+<RI> Initializing input.
+XInput1_3.dll not found.
+<RI> Input initialized.
+Platform assembly: C:\Users\Dominik\Documents\GitHub\WI\WIBuild\WI build_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: C:\Users\Dominik\Documents\GitHub\WI\WIBuild\WI build_Data\Managed\System.dll (this message is harmless)
+Discarding unnecessary tk2dUIManager instance.
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+It is no longer necessary to hook up a camera to the tk2dUIManager. You can simply attach a tk2dUICamera script to the cameras that interact with UI.
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+Platform assembly: C:\Users\Dominik\Documents\GitHub\WI\WIBuild\WI build_Data\Managed\System.Drawing.dll (this message is harmless)
+Platform assembly: C:\Users\Dominik\Documents\GitHub\WI\WIBuild\WI build_Data\Managed\Accessibility.dll (this message is harmless)
+Fallback handler could not load library C:/Users/Dominik/Documents/GitHub/WI/WIBuild/WI build_Data/Mono/libc
+Fallback handler could not load library C:/Users/Dominik/Documents/GitHub/WI/WIBuild/WI build_Data/Mono/.\libc
+Fallback handler could not load library C:/Users/Dominik/Documents/GitHub/WI/WIBuild/WI build_Data/Mono/libc
+Platform assembly: C:\Users\Dominik\Documents\GitHub\WI\WIBuild\WI build_Data\Managed\Mono.Posix.dll (this message is harmless)
+Fallback handler could not load library C:/Users/Dominik/Documents/GitHub/WI/WIBuild/WI build_Data/Mono/libc
+Fallback handler could not load library C:/Users/Dominik/Documents/GitHub/WI/WIBuild/WI build_Data/Mono/.\libc
+Fallback handler could not load library C:/Users/Dominik/Documents/GitHub/WI/WIBuild/WI build_Data/Mono/libc
+Fallback handler could not load library C:/Users/Dominik/Documents/GitHub/WI/WIBuild/WI build_Data/Mono/libX11
+Fallback handler could not load library C:/Users/Dominik/Documents/GitHub/WI/WIBuild/WI build_Data/Mono/.\libX11
+Fallback handler could not load library C:/Users/Dominik/Documents/GitHub/WI/WIBuild/WI build_Data/Mono/libX11
+Fallback handler could not load library C:/Users/Dominik/Documents/GitHub/WI/WIBuild/WI build_Data/Mono/libX11
+Fallback handler could not load library C:/Users/Dominik/Documents/GitHub/WI/WIBuild/WI build_Data/Mono/.\libX11
+Fallback handler could not load library C:/Users/Dominik/Documents/GitHub/WI/WIBuild/WI build_Data/Mono/libX11
+Fallback handler could not load library C:/Users/Dominik/Documents/GitHub/WI/WIBuild/WI build_Data/Mono/libX11
+Fallback handler could not load library C:/Users/Dominik/Documents/GitHub/WI/WIBuild/WI build_Data/Mono/.\libX11
+Fallback handler could not load library C:/Users/Dominik/Documents/GitHub/WI/WIBuild/WI build_Data/Mono/libX11
+Platform assembly: C:\Users\Dominik\Documents\GitHub\WI\WIBuild\WI build_Data\Managed\System.Xml.dll (this message is harmless)
+Fallback handler could not load library C:/Users/Dominik/Documents/GitHub/WI/WIBuild/WI build_Data/Mono/.\/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon
+Fallback handler could not load library C:/Users/Dominik/Documents/GitHub/WI/WIBuild/WI build_Data/Mono/lib/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon
+Fallback handler could not load library C:/Users/Dominik/Documents/GitHub/WI/WIBuild/WI build_Data/Mono/.\lib/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon
+Fallback handler could not load library C:/Users/Dominik/Documents/GitHub/WI/WIBuild/WI build_Data/Mono/lib/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon
