@@ -1,18 +1,8 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\InputManager.cs">
-    <Files>
-      <File FileName="Assets\Scripts\InputManager.cs" Line="417" Column="1" />
-    </Files>
-  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace />
+  <MonoDevelop.Ide.Workbench />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore>
-      <Breakpoint file="C:\Users\Dominik\Documents\GitHub\WI\Assets\Scripts\InputManager.cs" line="354" />
-      <Breakpoint file="C:\Users\Dominik\Documents\GitHub\WI\Assets\Scripts\InputManager.cs" line="371" />
-    </BreakpointStore>
+    <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches>
-    <Watch file="Assets\Scripts\InputManager.cs" line="342" offsetX="688" offsetY="5456" expression="wierzcholki" liveUpdate="False" />
-    <Watch file="Assets\Scripts\InputManager.cs" line="342" offsetX="688" offsetY="5456" expression="Korzenie" liveUpdate="False" />
-  </MonoDevelop.Ide.DebuggingService.PinnedWatches>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>

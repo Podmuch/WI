@@ -111,6 +111,14 @@ public class InputManager : MonoBehaviour
                     deltaRotation.y = tmpX;
                     Camera.rotation = Quaternion.Euler(Camera.rotation.eulerAngles + deltaRotation);
                     previousMousePosition = Input.mousePosition;
+                    for(int i=0;i<wierzcholki.Count;i++)
+                    {
+                        wierzcholki[i].RodzicTekstu.rotation = Camera.rotation;
+                    }
+                    for (int i = 0; i < krawedzie.Count; i++)
+                    {
+                        krawedzie[i].RodzicTekstu.rotation = Camera.rotation;
+                    }
                 }
                 else
                 {
@@ -120,15 +128,15 @@ public class InputManager : MonoBehaviour
         }
 	}
 
-    public void DodajWierzcholek(Vector3 position, string etykieta, string kolor)
+    public void DodajWierzcholek(Vector3 position, string etykieta, Material material)
     {
         GameObject nowywierzcholek = (GameObject)Instantiate(WierzcholekPrefab);
         nowywierzcholek.transform.position = position;
         Wierzcholek wierzcholek = nowywierzcholek.GetComponent<Wierzcholek>();
         wierzcholek.etykieta = etykieta;
-        wierzcholek.kolor = kolor;
-        wierzcholek.Kolor = (kolor == "czerwony") ? czerwony : (kolor == "zielony") ? zielony : niebieski;
-        wierzcholek.Rdzen.renderer.material = wierzcholek.Kolor;
+        wierzcholek.Tekst.text = etykieta;
+        wierzcholek.kolor = material.color;
+        wierzcholek.Rdzen.renderer.material = material;
         wierzcholki.Add(wierzcholek);
         licznikWierzcholkow++;
         wierzcholek.id = licznikWierzcholkow;
@@ -190,6 +198,8 @@ public class InputManager : MonoBehaviour
             krawedz.id = licznikKrawedzi;
             krawedz.pierwszy = pierwszy;
             krawedz.drugi = drugi;
+            krawedz.etykieta = "";
+            krawedz.Tekst.text = krawedz.etykieta;
             krawedz.Ustaw();
         }
     }
@@ -356,6 +366,14 @@ public class InputManager : MonoBehaviour
         {
             kr.Ustaw();
         }
+        for (int i = 0; i < wierzcholki.Count; i++)
+        {
+            wierzcholki[i].RodzicTekstu.rotation = Camera.rotation;
+        }
+        for (int i = 0; i < krawedzie.Count; i++)
+        {
+            krawedzie[i].RodzicTekstu.rotation = Camera.rotation;
+        }
     }
 
     public void UstawDzieciWierzcholka(Wierzcholek rodzic, List<Wierzcholek> dzieci, bool podzialpionowy=true)
@@ -450,31 +468,50 @@ public class InputManager : MonoBehaviour
         licznikKrawedzi = 0;
         SelectedItem = null;
         //wczytanie danych
-        string text=System.Text.Encoding.ASCII.GetString(buffer);
-        string[] lines = text.Replace("\r", "").Split('\n');
-        string[] cameraParams = lines[0].Split('@');
-        Camera.position = new Vector3(Convert.ToSingle(cameraParams[0]), Convert.ToSingle(cameraParams[1]), Convert.ToSingle(cameraParams[2]));
-        Camera.rotation = Quaternion.Euler(new Vector3(Convert.ToSingle(cameraParams[3]), Convert.ToSingle(cameraParams[4]), Convert.ToSingle(cameraParams[5])));
-        licznikWierzcholkow = Mathf.RoundToInt(Convert.ToSingle(lines[1]));
-        for (int i = 2; i < 2 + licznikWierzcholkow; i++)
+        try
         {
-            GameObject nowywierzcholek = (GameObject)Instantiate(WierzcholekPrefab);
-            Wierzcholek wierzcholek = nowywierzcholek.GetComponent<Wierzcholek>();
-            wierzcholki.Add(wierzcholek);
-            string[] wierzcholekParams = lines[i].Split('@');
-            wierzcholek.id = Convert.ToInt32(wierzcholekParams[2]);
+            string text = System.Text.Encoding.ASCII.GetString(buffer);
+            string[] lines = text.Replace("\r", "").Split('\n');
+            string[] cameraParams = lines[0].Split('@');
+            Camera.position = new Vector3(Convert.ToSingle(cameraParams[0]), Convert.ToSingle(cameraParams[1]), Convert.ToSingle(cameraParams[2]));
+            Camera.rotation = Quaternion.Euler(new Vector3(Convert.ToSingle(cameraParams[3]), Convert.ToSingle(cameraParams[4]), Convert.ToSingle(cameraParams[5])));
+            licznikWierzcholkow = Mathf.RoundToInt(Convert.ToSingle(lines[1]));
+            for (int i = 2; i < 2 + licznikWierzcholkow; i++)
+            {
+                GameObject nowywierzcholek = (GameObject)Instantiate(WierzcholekPrefab);
+                Wierzcholek wierzcholek = nowywierzcholek.GetComponent<Wierzcholek>();
+                wierzcholki.Add(wierzcholek);
+                string[] wierzcholekParams = lines[i].Split('@');
+                wierzcholek.id = Convert.ToInt32(wierzcholekParams[2]);
+            }
+            for (int i = 2; i < 2 + licznikWierzcholkow; i++)
+            {
+                wierzcholki[i - 2].Load(lines[i]);
+            }
+            licznikKrawedzi = Mathf.RoundToInt(Convert.ToSingle(lines[2 + licznikWierzcholkow]));
+            for (int i = 3 + licznikWierzcholkow; i < 3 + licznikWierzcholkow + licznikKrawedzi; i++)
+            {
+                GameObject nowakrawedz = (GameObject)Instantiate(KrawedzPrefab);
+                Krawedz krawedz = nowakrawedz.GetComponent<Krawedz>();
+                krawedzie.Add(krawedz);
+                krawedz.Load(lines[i]);
+            }
         }
-        for (int i = 2; i < 2 + licznikWierzcholkow; i++)
+        catch (Exception ex)
         {
-            wierzcholki[i - 2].Load(lines[i]);
-        }
-        licznikKrawedzi = Mathf.RoundToInt(Convert.ToSingle(lines[2 + licznikWierzcholkow]));
-        for (int i = 3 + licznikWierzcholkow; i < 3 + licznikWierzcholkow + licznikKrawedzi; i++)
-        {
-            GameObject nowakrawedz = (GameObject)Instantiate(KrawedzPrefab);
-            Krawedz krawedz = nowakrawedz.GetComponent<Krawedz>();
-            krawedzie.Add(krawedz);
-            krawedz.Load(lines[i]);
+            for (int i = 0; i < wierzcholki.Count; i++)
+            {
+                Destroy(wierzcholki[i].gameObject);
+            }
+            wierzcholki.Clear();
+            licznikWierzcholkow = 0;
+            for (int i = 0; i < krawedzie.Count; i++)
+            {
+                Destroy(krawedzie[i].gameObject);
+            }
+            krawedzie.Clear();
+            licznikKrawedzi = 0;
+            SelectedItem = null;
         }
     }
 

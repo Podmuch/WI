@@ -7,12 +7,13 @@ public class SelectableItem : MonoBehaviour {
 
     public Transform Podswietlenie;
     public Transform Rdzen;
+    public tk2dTextMesh Tekst;
+    public Transform RodzicTekstu;
 
     #endregion
 
     #region PREFAB REFERENCES
 
-    public Material Kolor;
     public Material AktywnyKolor;
     public Material NieAktywnyKolor;
 
@@ -20,6 +21,8 @@ public class SelectableItem : MonoBehaviour {
 
     protected bool isMarked;
     public int id;
+    public string etykieta;
+    public Color kolor;
 
     public void Zaznacz()
     {

@@ -7,25 +7,16 @@ public class BottomPanelController : MonoBehaviour
     #region SCENE REFERENCES
 
     public GameObject kontener;
-    public Transform CzerwonePodswietlenie;
-    public Transform NiebieskiePodswietlenie;
-    public Transform ZielonePodswietlenie;
     public tk2dTextMesh KorzenTekst;
     public tk2dUITextInput InputTekst;
-
-    #endregion
-
-    #region PREFAB REFERENCES
-
-    public Material Zielony;
-    public Material Czerwony;
-    public Material Niebieski;
-    public Material AktywnyKolor;
-    public Material NieAktywnyKolor;
+    public Kolor kolor;
+    public tk2dUIScrollbar zielony;
+    public tk2dUIScrollbar czerwony;
+    public tk2dUIScrollbar niebieski;
 
     #endregion
     
-    Wierzcholek SelectedItem;
+    SelectableItem SelectedItem;
     bool forceUpdate;
     bool isKorzen;
     bool isVisible;
@@ -40,9 +31,9 @@ public class BottomPanelController : MonoBehaviour
 	
 	// Update is called once per frame
 	void Update () {
-	    if(SelectedItem!=InputManager.Instance.SelectedItem as Wierzcholek)
+	    if(SelectedItem!=InputManager.Instance.SelectedItem)
         {
-            SelectedItem = InputManager.Instance.SelectedItem as Wierzcholek;
+            SelectedItem = InputManager.Instance.SelectedItem;
             forceUpdate = true;
         }
         if(forceUpdate)
@@ -55,29 +46,30 @@ public class BottomPanelController : MonoBehaviour
             else
             {
                 kontener.SetActive(true);
-                //wybor koloru
-                if(SelectedItem.kolor=="zielony")
-                {
-                    UstawZielony();
-                }
-                else if(SelectedItem.kolor =="czerwony")
-                {
-                    UstawCzerwony();
-                }
-                else
-                {
-                    UstawNiebieski();
-                }
                 //ustawienie korzenia
-                isKorzen=SelectedItem.Korzen == SelectedItem;
-                if (isKorzen)
+                if (SelectedItem as Wierzcholek != null)
                 {
-                    KorzenTekst.text = "Jest Korzeniem";
+                    isKorzen = (SelectedItem as Wierzcholek).Korzen == SelectedItem;
+                    if (isKorzen)
+                    {
+                        KorzenTekst.text = "Jest Korzeniem";
+                    }
+                    else
+                    {
+                        KorzenTekst.text = "Ustaw jako Korzen";
+                    }
+                    KorzenTekst.transform.parent.gameObject.SetActive(true);
                 }
                 else
                 {
-                    KorzenTekst.text = "Ustaw jako Korzen";
+                    KorzenTekst.transform.parent.gameObject.SetActive(false);
                 }
+                //kolor
+                kolor.kolor = SelectedItem.Rdzen.renderer.material.color;
+                kolor.renderer.material.color = kolor.kolor;
+                zielony.Value = kolor.kolor.g;
+                czerwony.Value = kolor.kolor.r;
+                niebieski.Value = kolor.kolor.b;
                 //zmiena tekstu
                 InputTekst.Text=SelectedItem.etykieta;
                 //koniec update'u
@@ -89,14 +81,34 @@ public class BottomPanelController : MonoBehaviour
 
     public void UstawJakoKorzen()
     {
-        if (!isKorzen)
+        if (SelectedItem as Wierzcholek != null)
         {
-            InputManager.Instance.UstawJakoKorzen(SelectedItem);
-            InputManager.Instance.PrzeliczPotomkow(InputManager.Instance.WezDrzewoZDanymKorzeniem(SelectedItem));
-            InputManager.Instance.UstawGraf();
-            isKorzen = true;
-            KorzenTekst.text = "Jest Korzeniem";
+            if (!isKorzen)
+            {
+                InputManager.Instance.UstawJakoKorzen(SelectedItem as Wierzcholek);
+                InputManager.Instance.PrzeliczPotomkow(InputManager.Instance.WezDrzewoZDanymKorzeniem(SelectedItem as Wierzcholek));
+                InputManager.Instance.UstawGraf();
+                isKorzen = true;
+                KorzenTekst.text = "Jest Korzeniem";
+            }
         }
+    }
+
+    public void Usun()
+    {
+        if (InputManager.Instance.SelectedItem as Wierzcholek != null)
+        {
+            InputManager.Instance.UsunWierzcholek(InputManager.Instance.SelectedItem as Wierzcholek);
+        }
+        else
+        {
+            InputManager.Instance.UsunKrawedz(InputManager.Instance.SelectedItem as Krawedz);
+        }
+        InputManager.Instance.SelectedItem = null;
+        SelectedItem = null;
+        forceUpdate = true;
+        //etykiety przy krawedziach
+        //sprawdz zapis i wczytywanie
     }
 
     public void ZmianaTekstu()
@@ -104,34 +116,24 @@ public class BottomPanelController : MonoBehaviour
         if (isVisible)
         {
             SelectedItem.etykieta = InputTekst.Text;
+            SelectedItem.Tekst.text = InputTekst.Text;
         }
     }
 
-    public void UstawZielony()
+    public void ZmienilSieZielony()
     {
-        CzerwonePodswietlenie.renderer.material = NieAktywnyKolor;
-        NiebieskiePodswietlenie.renderer.material = NieAktywnyKolor;
-        ZielonePodswietlenie.renderer.material = AktywnyKolor;
-        SelectedItem.kolor = "zielony";
-        SelectedItem.Kolor = Zielony;
-        SelectedItem.Rdzen.renderer.material = SelectedItem.Kolor;
+        kolor.ZmienilSieZielony();
+        SelectedItem.Rdzen.renderer.material.color = kolor.kolor;
     }
-    public void UstawCzerwony()
+
+    public void ZmienilSieCzerwony()
     {
-        ZielonePodswietlenie.renderer.material = NieAktywnyKolor;
-        NiebieskiePodswietlenie.renderer.material = NieAktywnyKolor;
-        CzerwonePodswietlenie.renderer.material = AktywnyKolor;
-        SelectedItem.kolor = "czerwony";
-        SelectedItem.Kolor = Czerwony;
-        SelectedItem.Rdzen.renderer.material = SelectedItem.Kolor;
+        kolor.ZmienilSieCzerwony();
+        SelectedItem.Rdzen.renderer.material.color = kolor.kolor;
     }
-    public void UstawNiebieski()
+    public void ZmienilSieNiebieski()
     {
-        CzerwonePodswietlenie.renderer.material = NieAktywnyKolor;
-        ZielonePodswietlenie.renderer.material = NieAktywnyKolor;
-        NiebieskiePodswietlenie.renderer.material = AktywnyKolor;
-        SelectedItem.kolor = "niebieski";
-        SelectedItem.Kolor = Niebieski;
-        SelectedItem.Rdzen.renderer.material = SelectedItem.Kolor;
+        kolor.ZmienilSieNiebieski();
+        SelectedItem.Rdzen.renderer.material.color = kolor.kolor;
     }
 }
